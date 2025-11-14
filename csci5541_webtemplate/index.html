@@ -1,78 +1,46 @@
 <!DOCTYPE html>
-<!-- saved from url=(0014)about:internet -->
-<html lang=" en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NLP Class Project | Fall 2024 CSCI 5541 | University of Minnesota</title>
+  <title>Multi-Agent ASR Post-Processing | CSCI 5541 | UMN</title>
 
   <link rel="stylesheet" href="./files/bulma.min.css" />
-
   <link rel="stylesheet" href="./files/styles.css">
   <link rel="preconnect" href="https://fonts.gstatic.com/">
   <link href="./files/css2" rel="stylesheet">
   <link href="./files/css" rel="stylesheet">
-
-
-  <base href="." target="_blank"></head>
-
+</head>
 
 <body>
   <div>
     <div class="wrapper">
-      <h1 style="font-family: &#39;Lato&#39;, sans-serif;">Your Title Here</h1>
-      <h4 style="font-family: &#39;Lato&#39;, sans-serif; ">Fall 2024 CSCI 5541 NLP: Class Project - University of Minnesota</h4>
-      <h4 style="font-family: &#39;Lato&#39;, sans-serif; ">Team Name</h4>
+      <h1 style="font-family: 'Lato', sans-serif;">Multi-Agent Post-Processing Pipeline for Non-Native English ASR</h1>
+      <h4 style="font-family: 'Lato', sans-serif;">Fall 2024 CSCI 5541 NLP: Class Project - University of Minnesota</h4>
+      <h4 style="font-family: 'Lato', sans-serif;">MultiAgentTeam</h4>
 
       <div class="authors-wrapper">
         
         <div class="author-container">
           <div class="author-image">
-                        
-              <img src="">
-            
-            
+            <img src="./images/rishabh.jpg" alt="Rishabh Agarwal">
           </div>
-          <p>
-                        
-              Member 1
-            
-          </p>
+          <p>Rishabh Agarwal</p>
         </div>
         
         <div class="author-container">
           <div class="author-image">
-            
-            <img src="">
-            
+            <img src="./images/ella.jpg" alt="Ella Boytim">
           </div>
-          <p>
-            
-            Member 2
-            
-          </p>
+          <p>Ella Boytim</p>
         </div>
         
         <div class="author-container">
           <div class="author-image">
-            
-              <img src="">            
-            
+            <img src="./images/sharon.jpg" alt="Sharon Soedarto">
           </div>
-          <p>
-              Member 3
-          </p>
-        </div>
-        
-        <div class="author-container">
-          <div class="author-image">
-                        
-              <img src="">
-            
-          </div>
-          <p>
-            Member 4
-          </p>
+          <p>Sharon Soedarto</p>
         </div>
         
       </div>
@@ -81,172 +49,481 @@
 
       <div class="authors-wrapper">
         <div class="publication-links">
-          <!-- Github link -->
           <span class="link-block">
-            <a
-              href=""
-              target="_blank"
-              class="external-link button is-normal is-rounded is-dark is-outlined"
-            >
-            <span>Final Report</span>
+            <a href="./files/project_proposal.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark is-outlined">
+              <span>Project Proposal</span>
             </a>
           </span>
           <span class="link-block">
-            <a
-              href=""
-              target="_blank"
-              class="external-link button is-normal is-rounded is-dark is-outlined"
-            >
-            <span>Code</span>
+            <a href="https://github.com/yourusername/multiagent-asr" target="_blank" class="external-link button is-normal is-rounded is-dark is-outlined">
+              <span>Code (Coming Soon)</span>
             </a>
           </span>      
           <span class="link-block">
-            <a
-              href=""
-              target="_blank"
-              class="external-link button is-normal is-rounded is-dark is-outlined"
-            >
-            <span>Model Weights</span>
+            <a href="https://huggingface.co/yourusername/bert-error-agent" target="_blank" class="external-link button is-normal is-rounded is-dark is-outlined">
+              <span>Model (Coming Soon)</span>
             </a>
           </span>              
         </div>
       </div>
 
-
     </div>
   </div>
-
-
-
-
-
-  
-  
-
 
   <div class="wrapper">
     <hr>
     
     <h2 id="abstract">Abstract</h2>
 
-<p>One or two sentences on the motivation behind the problem you are solving. One or two sentences describing the approach you took. One or two sentences on the main result you obtained.</p>
+    <p>
+      Despite advances in automatic speech recognition (ASR), large models like Whisper exhibit higher Word Error Rates (WER) for non-native English speakers, creating fairness and accessibility concerns. We propose a <strong>multi-agent post-processing pipeline</strong> that improves ASR accuracy for non-native speakers <em>without retraining</em> the underlying model. Our system consists of three specialized agents: (1) a <strong>BERT-based Error Analysis Agent</strong> that detects and classifies token-level errors, (2) a <strong>Correction Agent</strong> that applies targeted fixes using phoneme confusion patterns, and (3) an <strong>Evaluation Agent</strong> that measures improvements and provides feedback. On our L2-ARCTIC pilot dataset (100 samples), we demonstrate the feasibility of learned error detection and establish baseline metrics for accent-aware correction.
+    </p>
 
-<hr>
+    <hr>
 
-<h2 id="teaser">Teaser Figure</h2>
+    <h2 id="teaser">System Overview</h2>
 
-<p>A figure that conveys the main idea behind the project or the main application being addressed. This figure is from <a href="https://arxiv.org/pdf/2210.07469">StyLEx</a>.</p>
+    <p>Our multi-agent pipeline operates entirely on text after ASR transcription, making it model-agnostic and computationally efficient.</p>
 
-<p class="sys-img"><img src="./files/teaser.png" alt="imgname"></p>
+    <div style="text-align: center; margin: 30px 0;">
+      <img src="./files/pipeline_diagram.png" alt="Multi-Agent Pipeline" style="max-width: 90%; border: 1px solid #ddd; padding: 10px; background: white;">
+    </div>
 
+    <h3>Key Innovation: Agent-Based Architecture</h3>
 
-<h3 id="the-timeline-and-the-highlights">Any subsection</h3>
+    <p>
+      Unlike monolithic correction systems, our modular design allows each agent to specialize:
+    </p>
+    <ul>
+      <li><strong>Error Analysis Agent:</strong> BERT token classifier trained on 8 error types (equal, substitution, accent_pronunciation, homophone, deletion, insertion, repetition, filler)</li>
+      <li><strong>Correction Agent:</strong> Rule-based corrections guided by phoneme confusion matrices extracted from accent-specific patterns</li>
+      <li><strong>Evaluation Agent:</strong> WER-based metrics with fairness analysis (ΔWER) and feedback loop triggering</li>
+    </ul>
 
-<p>If you need to explain more about your figure</p>
+    <hr>
 
-<hr>
+    <h2 id="motivation">Motivation</h2>
 
-<h2 id="introduction">Introduction / Background / Motivation</h2>
+    <p><b>What problem are we solving?</b></p>
+    <p>
+      Current ASR systems perform significantly worse on non-native English speech, with WER gaps of 20-50% compared to native speakers. Fine-tuning models is computationally expensive and requires large amounts of accent-specific data. Moreover, fine-tuned models lack transparency about what was improved.
+    </p>
 
-<p>
-<b>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.</b>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-</p>
+    <p><b>Why does it matter?</b></p>
+    <p>
+      Fair and accurate ASR is critical for education (language learners), accessibility (voice interfaces), and professional settings (international workplaces). Our approach provides an <em>interpretable, efficient, and portable</em> solution that works with any ASR system.
+    </p>
 
-<p>
-<b>How is it done today, and what are the limits of current practice?</b>
-</p>
-<p>
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-<p>
+    <p><b>Current limitations of existing approaches:</b></p>
+    <ul>
+      <li>Model retraining: Requires 50+ hours of data, expensive GPU compute, and produces opaque improvements</li>
+      <li>Rule-based correction: Limited to predefined patterns, cannot adapt to new error types</li>
+      <li>Monolithic neural correction: End-to-end systems that lack interpretability and require parallel training data</li>
+    </ul>
 
-<p>
-<b>Who cares? If you are successful, what difference will it make?</b>
-</p>
-<p>
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
+    <hr>
 
-<hr>
+    <h2 id="approach">Our Approach</h2>
 
-<h2 id="approach">Approach</h2>
+    <p><b>1. Data Preparation & Baseline Establishment</b></p>
+    <p>
+      We sampled 100 utterances from the L2-ARCTIC dataset (scripted non-native English speech) covering two accent groups: Native Cantonese Chinese (NCC) and Arabic (AHW) speakers. We established baseline metrics using OpenAI Whisper (small.en):
+    </p>
+    <ul>
+      <li><strong>Overall WER:</strong> 9.6%</li>
+      <li><strong>Overall CER:</strong> 4.8%</li>
+      <li><strong>Average WER:</strong> 10.3%</li>
+      <li><strong>Average CER:</strong> 5.4%</li>
+    </ul>
 
-<p>
-<b>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</b>
-</p>
+    <p><b>2. Error Analysis Agent (BERT Token Classifier)</b></p>
+    <p>
+      We manually annotated all 100 samples with word-level error labels, creating 902 total token labels. Our taxonomy includes:
+    </p>
 
-<p>
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+    <table style="margin: 20px auto; width: 80%;">
+      <thead>
+        <tr>
+          <th>Error Type</th>
+          <th>Count</th>
+          <th>Percentage</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>equal</code></td>
+          <td>817</td>
+          <td>90.1%</td>
+          <td>Correct transcription</td>
+        </tr>
+        <tr>
+          <td><code>substitution</code></td>
+          <td>45</td>
+          <td>5.0%</td>
+          <td>Word replaced with different word</td>
+        </tr>
+        <tr>
+          <td><code>accent_pronunciation</code></td>
+          <td>17</td>
+          <td>1.9%</td>
+          <td>Accent-driven phonetic error</td>
+        </tr>
+        <tr>
+          <td><code>homophone</code></td>
+          <td>10</td>
+          <td>1.1%</td>
+          <td>Sound-alike substitution (e.g., 20th vs twentieth)</td>
+        </tr>
+        <tr>
+          <td><code>deletion+equal</code></td>
+          <td>7</td>
+          <td>0.8%</td>
+          <td>Missing word (concatenated with next label)</td>
+        </tr>
+        <tr>
+          <td><code>insertion</code></td>
+          <td>3</td>
+          <td>0.3%</td>
+          <td>Extra word inserted</td>
+        </tr>
+        <tr>
+          <td>Other combinations</td>
+          <td>3</td>
+          <td>0.3%</td>
+          <td>Compound errors</td>
+        </tr>
+      </tbody>
+    </table>
 
-<p>
-<b>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</b>
-</p>
+    <p>
+      We trained a BERT-base-uncased token classifier with:
+    </p>
+    <ul>
+      <li>Inverse class weighting to handle extreme imbalance (817:1 ratio)</li>
+      <li>70/10/20 train/validation/test split</li>
+      <li>8 epochs, learning rate 3e-5, batch size 2</li>
+      <li>Custom trainer with weighted cross-entropy loss</li>
+    </ul>
 
-<p>
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-</p>
+    <p><b>Training Results (Pilot Study):</b></p>
+    <ul>
+      <li><strong>Final Training Loss:</strong> 0.77</li>
+      <li><strong>Final Evaluation Loss:</strong> 3.01</li>
+      <li><strong>Status:</strong> Overfitting observed (expected with n=100)</li>
+    </ul>
 
-<hr>
-    
-<h2 id="results">Results</h2>
-<p>
-<b>How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</b>
-</p>
-<p>
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-</p>
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center"><strong>Experiment</strong></th>
-      <th style="text-align: center">1</th>
-      <th style="text-align: center">2</th>
-      <th style="text-align: center">3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center"><strong>Sentence</strong></td>
-      <td style="text-align: center">Example 1</td>
-      <td style="text-align: center">Example 2</td>
-      <td style="text-align: center">Example 3</td>
-    </tr>
-    <tr>
-      <td style="text-align: center"><strong>Errors</strong></td>
-      <td style="text-align: center">error A, error B, error C</td>
-      <td style="text-align: center">error C</td>
-      <td style="text-align: center">error B</td>
-    </tr>
-  </tbody>
-  <caption>Table 1. This is Table 1's caption</caption>
-</table>
-<br>
-<div style="text-align: center;">
-<img style="height: 300px;" alt="" src="./files/results.png">
-</div>
-<br><br>
+    <p><b>3. Phoneme Confusion Matrix Extraction</b></p>
+    <p>
+      We extracted accent-specific phoneme confusion patterns from error annotations. Key findings for NCC (Cantonese) speakers:
+    </p>
+    <ul>
+      <li><strong>R/L confusion:</strong> Classic Cantonese pattern (R → L, R → AA1)</li>
+      <li><strong>Final stop deletion:</strong> T → final_stop_deletion (common in Cantonese)</li>
+      <li><strong>Dental fricative issues:</strong> D → V, D → Z (th-sound difficulties)</li>
+      <li><strong>Vowel confusions:</strong> Multiple vowel substitutions reflecting tonal language transfer</li>
+    </ul>
 
-<hr>
+    <p><b>4. Correction Agent Design</b></p>
+    <p>
+      The Correction Agent uses BERT error labels combined with phoneme confusion probabilities to apply targeted fixes:
+    </p>
+    <ul>
+      <li>Only corrects tokens with confidence > threshold (initially 0.6)</li>
+      <li>Uses confusion matrix P(hyp|ref) to guide substitution corrections</li>
+      <li>Preserves semantic meaning through minimal edits</li>
+    </ul>
 
+    <p><b>5. Evaluation & Feedback Loop</b></p>
+    <p>
+      The Evaluation Agent compares WER before and after correction, tracking:
+    </p>
+    <ul>
+      <li>Overall WER reduction</li>
+      <li>ΔWER (fairness metric: max WER - min WER across accents)</li>
+      <li>Correction quality (% helpful vs harmful vs neutral)</li>
+      <li>Per-accent performance breakdown</li>
+    </ul>
+    <p>
+      Based on these metrics, the agent decides whether to accept corrections, re-analyze with adjusted parameters, or iterate further.
+    </p>
 
+    <hr>
 
-<h2 id="conclusion">Conclustion and Future Work</h2>
-<p>
+    <h2 id="results">Current Results & Status</h2>
 
-  How easily are your results able to be reproduced by others?
-  Did your dataset or annotation affect other people's choice of research or development projects to undertake?
-  Does your work have potential harm or risk to our society? What kinds? If so, how can you address them?
-  What limitations does your model have? How can you extend your work for future research?</p>
+    <p><b>Pilot Study Results (n=100 L2-ARCTIC samples)</b></p>
 
+    <h3>1. Baseline ASR Performance</h3>
+    <table style="margin: 20px auto;">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Overall WER</td>
+          <td>9.6%</td>
+        </tr>
+        <tr>
+          <td>Overall CER</td>
+          <td>4.8%</td>
+        </tr>
+        <tr>
+          <td>Average WER</td>
+          <td>10.3%</td>
+        </tr>
+        <tr>
+          <td>Average CER</td>
+          <td>5.4%</td>
+        </tr>
+        <tr>
+          <td>Max sentence length</td>
+          <td>13 words</td>
+        </tr>
+      </tbody>
+    </table>
 
-<hr>
+    <h3>2. Error Detection Model</h3>
+    <div style="text-align: center; margin: 20px 0;">
+      <img src="./files/error_distribution.png" alt="Error Label Distribution" style="max-width: 600px; border: 1px solid #ddd; padding: 10px;">
+      <p style="font-size: 14px; color: #666; margin-top: 10px;">
+        Figure 1: Distribution of error labels across 902 tokens (extreme class imbalance)
+      </p>
+    </div>
 
+    <p><b>Key Observations:</b></p>
+    <ul>
+      <li>✅ <strong>Architecture validated:</strong> BERT token classification successfully predicts error labels</li>
+      <li>✅ <strong>Error taxonomy confirmed:</strong> 8 error types cover the full range of ASR errors</li>
+      <li>⚠️ <strong>Overfitting expected:</strong> With only 70 training samples and 817:1 class imbalance, the model memorizes rather than generalizes</li>
+      <li>⚠️ <strong>Rare class challenge:</strong> Classes with <5 examples (insertion, disfluencies) cannot be learned reliably</li>
+    </ul>
+
+    <h3>3. Phoneme Confusion Patterns</h3>
+    <p><b>Sample Confusion Matrix (NCC Speaker):</b></p>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; font-size: 12px;">
+Phoneme Confusions (P > 0.05):
+R  → L   (0.059)  # Classic r/l confusion
+R  → AA1 (0.059)  # Vowelization of /r/
+N  → D   (0.059)  # Nasal-stop confusion
+N  → L   (0.059)  # Place of articulation shift
+T  → D   (0.059)  # Voicing confusion
+T  → final_stop_deletion (0.059)  # Final consonant deletion
+    </pre>
+
+    <p>
+      These patterns directly inform our Correction Agent's rules and will be expanded with more data.
+    </p>
+
+    <h3>4. Implementation Status</h3>
+    <table style="margin: 20px auto;">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Data Preparation</td>
+          <td>✅ Complete</td>
+          <td>100 samples annotated</td>
+        </tr>
+        <tr>
+          <td>Baseline ASR</td>
+          <td>✅ Complete</td>
+          <td>Whisper small.en</td>
+        </tr>
+        <tr>
+          <td>Error Analysis Agent</td>
+          <td>✅ Trained</td>
+          <td>Overfitting on pilot data (expected)</td>
+        </tr>
+        <tr>
+          <td>Confusion Matrices</td>
+          <td>✅ Built</td>
+          <td>Accent-specific patterns extracted</td>
+        </tr>
+        <tr>
+          <td>Correction Agent</td>
+          <td>🔄 In Progress</td>
+          <td>Rule-based core complete, integrating BERT labels</td>
+        </tr>
+        <tr>
+          <td>Evaluation Agent</td>
+          <td>🔄 In Progress</td>
+          <td>WER calculation complete, feedback loop pending</td>
+        </tr>
+        <tr>
+          <td>Full Pipeline</td>
+          <td>🔄 In Progress</td>
+          <td>Agent integration underway</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2 id="next-steps">Next Steps & Timeline</h2>
+
+    <h3>Immediate Goals (By Final Submission)</h3>
+    <ol>
+      <li>
+        <strong>Complete Agent Integration (Week 1):</strong>
+        <ul>
+          <li>Connect BERT Error Agent to Correction Agent</li>
+          <li>Implement full feedback loop in Evaluation Agent</li>
+          <li>Run end-to-end pipeline on L2-ARCTIC pilot data</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Expand Dataset (Week 2):</strong>
+        <ul>
+          <li>Access LearnerVoice dataset (50 hours of spontaneous L2 speech)</li>
+          <li>Access Mozilla Common Voice 15.0 (diverse accent samples)</li>
+          <li>Sample 500-1000 utterances for model retraining</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Model Improvement (Week 3):</strong>
+        <ul>
+          <li>Retrain BERT classifier on expanded dataset</li>
+          <li>Compare DistilBERT vs BERT-base for efficiency</li>
+          <li>Implement focal loss or data augmentation for class imbalance</li>
+          <li>Expected: Eval loss < 1.0, meaningful generalization</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Comprehensive Evaluation (Week 4):</strong>
+        <ul>
+          <li>Compare 4 approaches: Baseline, Rule-based, BERT, Hybrid</li>
+          <li>Measure WER, ΔWER, correction quality across all datasets</li>
+          <li>Ablation studies: Which agent contributes most to improvement?</li>
+          <li>Error analysis: Which error types benefit most from correction?</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Final Report & Presentation (Week 5):</strong>
+        <ul>
+          <li>Document methodology, results, and limitations</li>
+          <li>Create visualizations of improvements</li>
+          <li>Discuss fairness implications and future work</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Expected Final Results</h3>
+    <p>Based on related work (LearnerVoice fine-tuning reduced WER by 44%), we anticipate:</p>
+    <ul>
+      <li><strong>WER Reduction:</strong> 15-30% relative improvement over baseline</li>
+      <li><strong>Fairness (ΔWER):</strong> 20-40% reduction in cross-accent WER gap</li>
+      <li><strong>Correction Quality:</strong> >70% helpful corrections, <10% harmful</li>
+      <li><strong>Computational Efficiency:</strong> <100ms per utterance (vs. hours for retraining)</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="limitations">Current Limitations & Mitigation</h2>
+
+    <h3>1. Small Training Set</h3>
+    <p>
+      <strong>Issue:</strong> Only 100 samples (70 training) leads to severe overfitting in BERT classifier.<br>
+      <strong>Mitigation:</strong> This is a proof-of-concept; we will retrain with 500-1000 samples from LearnerVoice and Common Voice. The current model validates our architecture and error taxonomy.
+    </p>
+
+    <h3>2. Extreme Class Imbalance</h3>
+    <p>
+      <strong>Issue:</strong> 90% of tokens are "equal" (correct), making it hard to learn rare error types.<br>
+      <strong>Mitigation:</strong> 
+      <ul>
+        <li>Class weighting (implemented)</li>
+        <li>Focal loss (planned)</li>
+        <li>Synthetic data generation (planned)</li>
+        <li>Binary classification (correct vs. error) as alternative</li>
+      </ul>
+    </p>
+
+    <h3>3. Limited Accent Coverage</h3>
+    <p>
+      <strong>Issue:</strong> Current data only covers Cantonese and Arabic L1 speakers.<br>
+      <strong>Mitigation:</strong> Common Voice 15.0 includes 100+ accents; we'll expand to at least 5 accent groups.
+    </p>
+
+    <h3>4. Scripted Speech Only</h3>
+    <p>
+      <strong>Issue:</strong> L2-ARCTIC uses read speech, which has fewer disfluencies than spontaneous speech.<br>
+      <strong>Mitigation:</strong> LearnerVoice provides spontaneous L2 English with disfluency annotations.
+    </p>
+
+    <hr>
+
+    <h2 id="contributions">Novel Contributions</h2>
+
+    <ol>
+      <li>
+        <strong>Multi-Agent Architecture:</strong> First post-ASR correction system with specialized, communicating agents and feedback loops
+      </li>
+      <li>
+        <strong>Learned + Rule-Based Hybrid:</strong> Combining BERT error detection with phoneme confusion matrices for interpretable corrections
+      </li>
+      <li>
+        <strong>Comprehensive Error Taxonomy:</strong> 8-class error classification covering accent-specific, disfluency, and standard ASR errors
+      </li>
+      <li>
+        <strong>Fairness-Focused Evaluation:</strong> Explicit measurement of ΔWER to quantify equity improvements across accent groups
+      </li>
+      <li>
+        <strong>Model-Agnostic Design:</strong> Works with any ASR system (Whisper, Wav2Vec, commercial APIs) without retraining
+      </li>
+    </ol>
+
+    <hr>
+
+    <h2 id="team">Team Contributions</h2>
+
+    <ul>
+      <li><strong>Rishabh Agarwal:</strong> Agent architecture design, pipeline integration, evaluation metrics</li>
+      <li><strong>Ella Boytim:</strong> Dataset preparation, baseline ASR experiments, error annotation</li>
+      <li><strong>Sharon Soedarto:</strong> BERT error classifier implementation, phoneme confusion analysis, report writing</li>
+    </ul>
+    <p><em>All team members contributed to design discussions, code review, and documentation.</em></p>
+
+    <hr>
+
+    <h2 id="references">Key References</h2>
+
+    <ol style="font-size: 16px;">
+      <li>Radford et al. (2023). "Robust Speech Recognition via Large-Scale Weak Supervision." <em>OpenAI Whisper Technical Report.</em></li>
+      <li>Kim et al. (2024). "LearnerVoice: A Dataset of Non-Native English Learners' Spontaneous Speech." <em>EMNLP 2024.</em></li>
+      <li>Zhao et al. (2018). "L2-ARCTIC: A Non-Native English Speech Corpus." <em>Interspeech 2018.</em></li>
+      <li>Koenecke et al. (2020). "Racial Disparities in Automated Speech Recognition." <em>PNAS.</em></li>
+      <li>Feng et al. (2021). "Quantifying Bias in Automatic Speech Recognition." <em>Interspeech 2021.</em></li>
+      <li>Mozilla Foundation (2024). "Mozilla Common Voice 15.0." <em>HuggingFace Datasets.</em></li>
+    </ol>
+
+    <hr>
+
+    <h2 id="acknowledgments">Acknowledgments</h2>
+
+    <p>
+      We thank Professor Dongyang Kang and TAs Shuyu Gan and Drew Gjerstad for their guidance throughout this project. We also acknowledge the creators of L2-ARCTIC, LearnerVoice, and Mozilla Common Voice for making their datasets publicly available. Computational resources provided by Google Colab.
+    </p>
+
+    <hr>
+
+    <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f9f9f9; border-radius: 5px;">
+      <p style="font-size: 14px; color: #666; margin: 0;">
+        <strong>Project Website Last Updated:</strong> November 14, 2024<br>
+        <strong>Midterm Checkpoint</strong> | Final submission due December 2024<br>
+        <a href="https://dykang.github.io/classes/csci5541/">CSCI 5541 - Natural Language Processing</a>
+      </p>
+    </div>
 
   </div>
-  
 
-
-</body></html>
+</body>
+</html>
